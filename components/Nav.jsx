@@ -13,14 +13,11 @@ const Nav = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
-    const setProviders = async () => {
-      const response = await getProviders();
-
-      setProviders(response);
-    };
-
-    setProviders();
-  }, [providers]);
+    (async () => {
+      const res = await getProviders();
+      setProviders(res);
+    })();
+  }, []);
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -64,7 +61,9 @@ const Nav = () => {
                 <button
                   type="button"
                   key={providers.name}
-                  onClick={() => sighIn(provider.id)}
+                  onClick={() => {
+                    signIn(provider.id);
+                  }}
                   className="black_btn"
                 >
                   Sign In
@@ -84,11 +83,7 @@ const Nav = () => {
               height={37}
               className="rounded-full"
               alt="Profile"
-              onClick={() =>
-                setToggleDropdown((prev) => {
-                  !prev;
-                })
-              }
+              onClick={() => setToggleDropdown(!toggleDropdown)}
             />
 
             {toggleDropdown && (
@@ -100,6 +95,25 @@ const Nav = () => {
                 >
                   My Profile
                 </Link>
+
+                <Link
+                  href="/create-prompt"
+                  className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  Create Prompt
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setToggleDropdown(false);
+                    signOut();
+                  }}
+                  className="mt-5 w-full black_btn"
+                >
+                  Sign Out
+                </button>
               </div>
             )}
           </div>
@@ -109,11 +123,13 @@ const Nav = () => {
               Object.values(providers).map((provider) => (
                 <button
                   type="button"
-                  key={providers.name}
-                  onClick={() => sighIn(provider.id)}
+                  key={provider.name}
+                  onClick={() => {
+                    signIn(provider.id);
+                  }}
                   className="black_btn"
                 >
-                  Sign In
+                  Sign in
                 </button>
               ))}
           </>
