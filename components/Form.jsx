@@ -10,7 +10,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         {type === "Create"
           ? `Create and share amazing prompts with the world, and let your
         imagination run wild with any AI-powered platforms.`
-          : "Edit your prompt."}
+          : "Enjoy the flexibility of managing your prompts with ease and let your imagination shine!"}
       </p>
 
       <form
