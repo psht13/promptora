@@ -32,8 +32,6 @@ const Feed = () => {
       method: "GET",
       headers: {
         "Cache-Control": "no-store", // Забороняє кешування
-        Pragma: "no-cache", // Забороняє кешування (для сумісності з HTTP/1.0)
-        Expires: "0", // Дата закінчення терміну дії - "вже минула"
       },
     });
 
