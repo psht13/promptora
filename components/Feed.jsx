@@ -27,26 +27,20 @@ const Feed = () => {
   const [searchedResults, setSearchedResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchPosts = async () => {
-    const response = await fetch("/api/prompt", {
-      method: "GET",
-      headers: {
-        "Cache-Control": "no-store", // Забороняє кешування
-      },
-    });
-
-    if (!response.ok) {
-      // Обробка помилки, якщо відповідь не успішна
-      console.log("Failed to fetch posts:", response.statusText);
-      return;
-    }
-
-    const data = await response.json();
-
-    setLoading(false);
-    setAllPosts(data);
-  };
   useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("/api/prompt", {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-store", // Забороняє кешування
+        },
+      });
+      const data = await response.json();
+
+      setLoading(false);
+      setAllPosts(data);
+    };
+
     fetchPosts();
   }, []);
 
