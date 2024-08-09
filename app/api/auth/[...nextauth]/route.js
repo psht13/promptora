@@ -19,7 +19,7 @@ const handler = NextAuth({
 
         return session;
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     },
 
