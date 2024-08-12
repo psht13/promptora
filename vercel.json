@@ -1,11 +1,9 @@
 {
-  "crons": [
-    {
-      "path": "/api/prompt",
-      "schedule": "0 0 * * *"
-    }
-  ],
-  "experimental": {
-    "bundlePagesExternals": true
+    "crons": [
+      {
+        "path": "/api/prompt",
+        "schedule": "0 0 * * *"
+      }
+    ]
   }
-}
+  
