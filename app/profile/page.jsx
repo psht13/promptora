@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
+import Error from "@components/Error";
 import Profile from "@components/Profile";
 import Loader from "@components/Loader";
 
@@ -13,14 +14,21 @@ const MyProfile = () => {
 
   const [myPosts, setMyPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      if (session?.user?.id) {
-        const response = await fetch(`/api/users/${session.user.id}/posts`);
-        const data = await response.json();
+      setError(false);
+      try {
+        if (session?.user?.id) {
+          const response = await fetch(`/api/users/${session.user.id}/posts`);
+          const data = await response.json();
 
-        setMyPosts(data);
+          setMyPosts(data);
+        }
+      } catch (error) {
+        setError(true);
+      } finally {
         setLoading(false);
       }
     };
@@ -72,6 +80,11 @@ const MyProfile = () => {
         handleDelete={handleDelete}
       />
       {loading && <Loader />}
+      {error && (
+        <Error>
+          Error loading personalized prompts. Please reload the page.
+        </Error>
+      )}
     </>
   );
 };

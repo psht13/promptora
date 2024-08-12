@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
 import Loader from "@components/Loader";
+import Error from "@components/Error";
 
 const UserProfile = ({ params }) => {
   const searchParams = useSearchParams();
@@ -12,14 +13,21 @@ const UserProfile = ({ params }) => {
 
   const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${params?.id}/posts`);
-      const data = await response.json();
+      setError(false);
+      try {
+        const response = await fetch(`/api/users/${params?.id}/posts`);
+        const data = await response.json();
 
-      setLoading(false);
-      setUserPosts(data);
+        setUserPosts(data);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     };
 
     if (params?.id) fetchPosts();
@@ -33,6 +41,11 @@ const UserProfile = ({ params }) => {
         data={userPosts}
       />
       {loading && <Loader />}
+      {error && (
+        <Error>
+          Error loading personalized prompts. Please reload the page.
+        </Error>
+      )}
     </>
   );
 };
