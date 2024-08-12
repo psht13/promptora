@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 import PromptCard from "./PromptCard";
+import Loader from "./Loader";
+import Error from "./Error";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -26,22 +28,23 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch("/api/prompt", {
-        method: "GET",
-        headers: {
-          "Cache-Control": "no-store", // Забороняє кешування
-        },
-      });
-      const data = await response.json();
-
-      setLoading(false);
-      setAllPosts(data);
-    };
-
-    fetchPosts();
+    (async () => {
+      setError(false);
+      try {
+        const response = await fetch("/api/prompt", {
+          method: "GET",
+        });
+        const data = await response.json();
+        setAllPosts(data);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, []);
 
   const filterPrompts = (searchtext) => {
@@ -96,8 +99,11 @@ const Feed = () => {
         />
       ) : (
         <>
-          {loading && <div className="mt-24 text-md font-sans">Loading...</div>}
           <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
+          {loading && <Loader />}
+          {error && (
+            <Error>Error loading all prompts. Please reload the page.</Error>
+          )}
         </>
       )}
     </section>

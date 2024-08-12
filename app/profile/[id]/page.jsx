@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
+import Loader from "@components/Loader";
 
 const UserProfile = ({ params }) => {
   const searchParams = useSearchParams();
@@ -31,7 +32,7 @@ const UserProfile = ({ params }) => {
         desc={`Welcome to ${userName}'s personalized profile page. Explore ${userName}'s exceptional prompts and be inspired by the power of their imagination`}
         data={userPosts}
       />
-      {loading && <div className="text-md font-sans">Loading...</div>}
+      {loading && <Loader />}
     </>
   );
 };

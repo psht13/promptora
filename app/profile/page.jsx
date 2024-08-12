@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
+import Loader from "@components/Loader";
 
 const MyProfile = () => {
   const { data: session, status } = useSession();
@@ -70,7 +71,7 @@ const MyProfile = () => {
         handleEdit={handleEdit}
         handleDelete={handleDelete}
       />
-      {loading && <div className="text-md font-sans">Loading...</div>}
+      {loading && <Loader />}
     </>
   );
 };
