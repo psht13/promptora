@@ -45,6 +45,8 @@ const Feed = () => {
           setErrorCount((prev) => prev + 1);
         } else {
           setError(true);
+          setErrorCount(0)
+
         }
       } finally {
         setLoading(false);
