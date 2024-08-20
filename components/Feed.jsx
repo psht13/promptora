@@ -29,6 +29,7 @@ const Feed = () => {
   const [searchedResults, setSearchedResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [errorCount, setErrorCount] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -40,12 +41,16 @@ const Feed = () => {
         const data = await response.json();
         setAllPosts(data);
       } catch (error) {
-        setError(true);
+        if (errorCount < 5) {
+          setErrorCount((prev) => prev + 1);
+        } else {
+          setError(true);
+        }
       } finally {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [errorCount]);
 
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
