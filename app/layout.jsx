@@ -3,7 +3,7 @@ import Provider from "@components/Provider";
 import "@styles/globals.css";
 
 export const metadata = {
-  title: "Promptopia",
+  title: "Promptora",
   description: "Discover and  share AI Prompts",
 };
 
@@ -11,7 +11,11 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <head>
-      <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/assets/images/logo.svg"
+        />
       </head>
       <body>
         <Provider>
