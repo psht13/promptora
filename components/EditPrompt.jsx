@@ -10,6 +10,7 @@ const EditPrompt = () => {
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
 
+  const [errorCount, setErrorCount] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
     prompt: "",
@@ -26,11 +27,15 @@ const EditPrompt = () => {
           prompt: data.prompt,
           tag: data.tag,
         });
-      } catch (error) {}
+      } catch (error) {
+        if (errorCount > 5) {
+          setErrorCount((prev) => prev + 1);
+        } else console.log(error);
+      }
     };
 
     if (promptId) getPromptDetails();
-  }, [promptId]);
+  }, [promptId, errorCount]);
 
   const editPrompt = async (e) => {
     e.preventDefault();

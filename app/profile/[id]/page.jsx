@@ -14,6 +14,7 @@ const UserProfile = ({ params }) => {
   const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [errorCount, setErrorCount] = useState(0);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -23,15 +24,19 @@ const UserProfile = ({ params }) => {
         const data = await response.json();
 
         setUserPosts(data);
-      } catch (error) {
-        setError(true);
-      } finally {
         setLoading(false);
+      } catch (error) {
+        if (errorCount < 5) {
+          setErrorCount((prev) => prev + 1);
+        } else {
+          setError(true);
+          setLoading(false);
+        }
       }
     };
 
     if (params?.id) fetchPosts();
-  }, [params.id]);
+  }, [params.id, errorCount]);
 
   return (
     <>
