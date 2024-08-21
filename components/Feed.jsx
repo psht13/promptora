@@ -8,7 +8,7 @@ import Error from "./Error";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
-    <div className="mt-16 prompt_layout">
+    <div className="mt-6 lg:mt-16 prompt_layout">
       {data.map((post) => (
         <PromptCard
           key={post._id}
@@ -48,7 +48,7 @@ const Feed = () => {
           setLoading(false);
           setError(true);
         }
-      }    
+      }
     })();
   }, [errorCount]);
 
@@ -104,7 +104,10 @@ const Feed = () => {
         />
       ) : (
         <>
-          <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
+          <PromptCardList
+            data={allPosts}
+            handleTagClick={handleTagClick}
+          />
           {loading && <Loader />}
           {error && (
             <Error>Error loading all prompts. Please reload the page.</Error>
