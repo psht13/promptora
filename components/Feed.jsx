@@ -40,15 +40,15 @@ const Feed = () => {
         });
         const data = await response.json();
         setAllPosts(data);
+        setLoading(false);
       } catch (error) {
         if (errorCount < 5) {
           setErrorCount((prev) => prev + 1);
         } else {
+          setLoading(false);
           setError(true);
         }
-      } finally {
-        setLoading(false);
-      }
+      }    
     })();
   }, [errorCount]);
 

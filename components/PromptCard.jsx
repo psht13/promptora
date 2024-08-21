@@ -67,7 +67,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
 
       <p
-        className="font-inter text-sm blue_gradient cursor-pointer"
+        className="font-inter text-sm very_blue cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
         {post.tag.includes("#") ? post.tag : "#" + post.tag}
@@ -82,7 +82,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             Edit
           </p>
           <p
-            className="font-inter text-sm orange_gradient cursor-pointer"
+            className="font-inter text-sm red_gradient cursor-pointer"
             onClick={handleDelete}
           >
             Delete
