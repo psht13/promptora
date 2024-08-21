@@ -45,24 +45,18 @@
   z-index: 3;
   top: 80px;
   width: 100%;
-  width: 100%;
   max-width: 640px;
-  height: fit-content;
   height: 100%;
-  opacity: 0.15;
-  background-image: radial-gradient(
-      at 27% 37%,
-      hsla(215, 98%, 61%, 1) 0px,
-      transparent 0%
-    ),
-    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
-    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
-    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
-    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
-    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+  opacity: 0.2;
+  background-image: radial-gradient(at 30% 40%, #3d99f5 0px, transparent 50%),
+    radial-gradient(at 95% 20%, hsla(200, 95%, 65%, 1) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, hsla(220, 90%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 15% 30%, hsla(190, 85%, 55%, 1) 0px, transparent 50%),
+    radial-gradient(at 80% 90%, hsla(230, 85%, 60%, 1) 0px, transparent 50%),
+    radial-gradient(at 35% 45%, hsla(240, 80%, 75%, 1) 0px, transparent 50%),
+    radial-gradient(at 75% 55%, hsla(200, 80%, 75%, 1) 0px, transparent 50%);
   content: "";
-  filter: blur(100px) saturate(150%);
+  filter: blur(90px) saturate(130%);
 }
 
 @media screen and (max-width: 640px) {
@@ -90,7 +84,7 @@
 }
 
 .orange_gradient {
-  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
 }
 
 .green_gradient {
@@ -98,7 +92,7 @@
 }
 
 .blue_gradient {
-  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
 }
 
 .desc {
